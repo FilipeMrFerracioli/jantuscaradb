@@ -1,0 +1,131 @@
+/* #f1ac18 - yellow
+ * #79a33d - green
+ * #F25B0A - orange
+ * #cc080b - red
+*/
+
+:root {
+    --primary-color: #f1ac18;
+    --secondary-color: var();
+    --accent-color: #F25B0A;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    backdrop-filter: blur(3px);
+    border-bottom: solid 3px var(--primary-color);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    padding: 0 30px;
+    width: 100%;
+    height: 60px;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+    z-index: 99;
+}
+
+.logo {
+    height: 80%;
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-left: 8px;
+    font-weight: 400;
+}
+
+.special-area {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    background-color: #000;
+    border-radius: 8px;
+    /* padding-left: 10px; */
+}
+
+.my-requests {
+    /* margin-right: 20px; */
+    margin: 0 20px;
+    font-size: 16px;
+}
+
+.my-requests:hover {
+    color: var(--primary-color);
+}
+
+.btn-login {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    padding: 3px 10px;
+    font-size: 18px;
+}
+
+.btn-login:hover {
+    background-color: var(--accent-color);
+}
+
+header ul {
+    display: flex;
+    justify-content: center;
+}
+
+header li {
+    list-style: none;
+    margin: 20px 15px;
+}
+
+header a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+header ul a:hover {
+    border-bottom: solid 2px var(--primary-color);
+}
+
+header ul a:active,
+.special-area .my-requests:active {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+footer {
+    padding: 15px 30px;
+    /* margin-top: 800px; */
+    background-color: var(--primary-color);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer h1 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+footer div a {
+    margin-left: 15px;
+}

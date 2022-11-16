@@ -1,0 +1,58 @@
+.bg-fixed {
+    background-image: url("/img/pexels-jonathan-borba-2878739.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.banner {
+    /* visibility: hidden; */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.banner-hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-hover h1 {
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    letter-spacing: 2px;
+    padding: 3px 15px;
+    color: #fff;
+    font-size: 36px;
+    font-weight: 400;
+    box-shadow: 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.banner-hover h2 {
+    margin-top: 15px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 3px 12px;
+    color: var(--primary-color);
+    font-size: 28px;
+    font-weight: 400;
+    box-shadow: 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.perforated {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    /* clip-path: polygon(0% 0%, 50% 100%, ); */
+}
