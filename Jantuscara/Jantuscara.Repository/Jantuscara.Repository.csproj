@@ -26,8 +26,4 @@
     <ProjectReference Include="..\Jantuscara.Domain\Jantuscara.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Implementations\" />
-  </ItemGroup>
-
 </Project>

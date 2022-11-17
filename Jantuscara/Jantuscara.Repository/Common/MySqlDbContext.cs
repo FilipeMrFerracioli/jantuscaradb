@@ -8,6 +8,8 @@ namespace Jantuscara.Repository
         // DbSets
         public virtual DbSet<Request> Requests { get; set; }
         public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<RequestItem> RequestItems { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

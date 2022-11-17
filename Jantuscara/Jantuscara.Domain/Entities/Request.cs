@@ -8,7 +8,19 @@
         public OrderStatus Status { get; set; }
         public int IdCustomer { get; set; }
         public virtual Customer Customer { get; set; }
-        //public virtual List<Item> Items { get; set; }
         public virtual List<RequestItem> RequestItems { get; set; }
+
+        public void CalculateAmount(double valueItems)
+        {
+            valueItems += valueItems * (Discount / 100);
+
+            if (Tip)
+            {
+                valueItems += valueItems * (10 / 100);
+            }
+
+            Amount = valueItems;
+            //return valueItems;
+        }
     }
 }
