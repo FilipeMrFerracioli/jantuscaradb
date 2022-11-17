@@ -1,0 +1,6 @@
+Add-Migration -Project Jantuscara.Repository -StartupProject Jantuscara.API -Context MySqlDbContext
+
+Script-Migration -Context MySqlDbContext -Project Jantuscara.Repository -StartupProject Jantuscara.API
+
+Update-Database -Context MySqlDbContext -Project Jantuscara.Repository -StartupProject Jantuscara.API
+
