@@ -1,4 +1,5 @@
 ﻿using Jantuscara.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jantuscara.Repository
 {
@@ -16,7 +17,10 @@ namespace Jantuscara.Repository
             if (id <= 0) return null;
             try
             {
-                var result = _context.Requests.SingleOrDefault(x => x.Id.Equals(id));
+                var result = _context.Requests
+                    .Include(x => x.Customer)
+                    .Include(x => x.RequestItems) // verificar
+                    .SingleOrDefault(x => x.Id.Equals(id));
 
                 if (result == null) return null;
 
@@ -30,6 +34,9 @@ namespace Jantuscara.Repository
             if (request == null) return null;
             try
             {
+                var customer = _context.Customers.FirstOrDefault(x => x.Id.Equals(request.IdCustomer));
+                if (customer == null) return null;
+
                 _context.Requests.Add(request);
                 _context.SaveChanges();
 
@@ -44,10 +51,13 @@ namespace Jantuscara.Repository
             try
             {
                 var result = _context.Requests.SingleOrDefault(x => x.Id.Equals(request.Id));
-
                 if (result == null) return null;
 
+                var customer = _context.Customers.FirstOrDefault(x => x.Id.Equals(request.IdCustomer));
+                if (customer == null) return null;
+
                 request.Id = result.Id;
+                request.IdCustomer = customer.Id;
                 _context.Entry(result).CurrentValues.SetValues(request);
                 _context.SaveChanges();
 

@@ -2,7 +2,8 @@
 {
     public class CustomerConverter :
         IParser<CustomerVO, Customer>,
-        IParser<Customer, CustomerResponseVO>
+        IParser<Customer, CustomerResponseVO>,
+        IParser<CustomerResponseVO, CustomerVO>
     {
         public Customer Parse(CustomerVO origin)
         {
@@ -38,6 +39,24 @@
         }
 
         public List<CustomerResponseVO> Parse(List<Customer> origin)
+        {
+            if (origin == null) return null;
+            return origin.Select(item => Parse(item)).ToList();
+        }
+
+        public CustomerVO Parse(CustomerResponseVO origin)
+        {
+            if (origin == null) return null;
+
+            return new CustomerVO
+            {
+                FirstName = origin.FirstName,
+                LastName = origin.LastName,
+                Document = origin.Document
+            };
+        }
+
+        public List<CustomerVO> Parse(List<CustomerResponseVO> origin)
         {
             if (origin == null) return null;
             return origin.Select(item => Parse(item)).ToList();

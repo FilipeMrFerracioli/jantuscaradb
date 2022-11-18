@@ -4,6 +4,15 @@
         IParser<RequestVO, Request>,
         IParser<Request, RequestResponseVO>
     {
+        private readonly CustomerConverter _customerConverter;
+        private readonly RequestItemConverter _requestItemConverter;
+
+        public RequestConverter()
+        {
+            _customerConverter = new CustomerConverter();
+            _requestItemConverter = new RequestItemConverter();
+        }
+
         public Request Parse(RequestVO origin)
         {
             if (origin == null) return null;
@@ -28,7 +37,8 @@
             {
                 Id = origin.Id,
                 IdCustomer = origin.IdCustomer,
-                Customer = origin.Customer,
+                Customer = _customerConverter.Parse(_customerConverter.Parse(origin.Customer)),
+                RequestItems = _requestItemConverter.Parse(origin.RequestItems),
                 CreatedAt = origin.CreatedAt,
                 UpdatedAt = origin.UpdatedAt
             };

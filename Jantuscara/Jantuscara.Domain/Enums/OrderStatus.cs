@@ -4,6 +4,7 @@
     {
         Preparing,
         Ready,
-        Finished
+        Finished,
+        Canceled
     }
 }

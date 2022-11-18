@@ -1,3 +1,5 @@
+using Jantuscara.Repository;
+
 namespace Jantuscara.API
 {
     public class DependencyInjection
@@ -13,8 +15,17 @@ namespace Jantuscara.API
 
 
             /* From own repository */
-            //serviceProvider.AddScoped(typeof(ILoginService), typeof(LoginService));
-            //serviceProvider.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            serviceProvider.AddScoped(typeof(IItemService), typeof(ItemService));
+            serviceProvider.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
+
+            serviceProvider.AddScoped(typeof(IRequestService), typeof(RequestService));
+            serviceProvider.AddScoped(typeof(IRequestRepository), typeof(RequestRepository));
+
+            serviceProvider.AddScoped(typeof(ICustomerService), typeof(CustomerService));
+            serviceProvider.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
+
+            serviceProvider.AddScoped(typeof(IRequestItemService), typeof(RequestItemService));
+            serviceProvider.AddScoped(typeof(IRequestItemRepository), typeof(RequestItemRepository));
 
             /* Generic repository */
             //serviceProvider.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));

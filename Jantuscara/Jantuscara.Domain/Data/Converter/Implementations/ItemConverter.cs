@@ -2,7 +2,8 @@
 {
     public class ItemConverter :
         IParser<ItemVO, Item>,
-        IParser<Item, ItemResponseVO>
+        IParser<Item, ItemResponseVO>,
+        IParser<ItemResponseVO, ItemVO>
     {
         public Item Parse(ItemVO origin)
         {
@@ -40,6 +41,25 @@
         }
 
         public List<ItemResponseVO> Parse(List<Item> origin)
+        {
+            if (origin == null) return null;
+            return origin.Select(item => Parse(item)).ToList();
+        }
+
+        public ItemVO Parse(ItemResponseVO origin)
+        {
+            if (origin == null) return null;
+
+            return new ItemVO
+            {
+                Name = origin.Name,
+                Price = origin.Price,
+                Description = origin.Description,
+                ImgURL = origin.Description
+            };
+        }
+
+        public List<ItemVO> Parse(List<ItemResponseVO> origin)
         {
             if (origin == null) return null;
             return origin.Select(item => Parse(item)).ToList();

@@ -18,7 +18,7 @@ namespace Jantuscara.Repository
             {
                 var result = _context.Customers.SingleOrDefault(x => x.Document.Equals(customer.Document));
 
-                if (!(result == null)) return result;
+                if (result != null) return result;
 
                 _context.Customers.Add(customer);
                 _context.SaveChanges();
@@ -37,11 +37,12 @@ namespace Jantuscara.Repository
 
                 if (result == null) return null;
 
+                customer.Id = result.Id;
                 customer.Document = result.Document; // verificar se precisa
                 _context.Entry(result).CurrentValues.SetValues(customer);
                 _context.SaveChanges();
 
-                return customer;
+                return result;
             }
             catch (Exception) { throw; }
         }

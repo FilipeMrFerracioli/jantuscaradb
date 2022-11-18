@@ -30,6 +30,9 @@ namespace Jantuscara.Repository
             if (requestItem == null) return null;
             try
             {
+                var item = _context.Items.SingleOrDefault(x => x.Id.Equals(requestItem.IdItem));
+                if (item == null) return null;
+
                 _context.RequestItems.Add(requestItem);
                 _context.SaveChanges();
 
