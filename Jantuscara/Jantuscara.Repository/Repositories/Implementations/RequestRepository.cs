@@ -57,21 +57,100 @@ namespace Jantuscara.Repository
             catch (Exception) { throw; }
         }
 
-        public Request Update(Request request)
+        public Request SetDiscount(int idRequest, int value)
         {
-            if (request == null) return null;
+            if (idRequest <= 0 || value < 0 || value > 100) return null;
             try
             {
-                var result = _context.Requests.SingleOrDefault(x => x.Id.Equals(request.Id));
-                if (result == null) return null;
+                var request = _context.Requests.FirstOrDefault(x => x.Id.Equals(idRequest));
+                if (request == null) return null;
 
-                var customer = _context.Customers.FirstOrDefault(x => x.Id.Equals(request.IdCustomer));
-                if (customer == null) return null;
-
-                request.Id = result.Id;
-                request.IdCustomer = customer.Id;
-                _context.Entry(result).CurrentValues.SetValues(request);
+                //request.Discount = value;
+                //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
+                _context.Database.ExecuteSqlRaw(@"UPDATE requests"
+                                             + " SET discount = {0}"
+                                             + " WHERE id = {1}", value, idRequest);
                 _context.SaveChanges();
+
+                request = _context.Requests
+                    .Include(x => x.Customer)
+                    .Include(x => x.RequestItems)
+                    .FirstOrDefault(x => x.Id.Equals(idRequest));
+
+                return request;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Request PayTip(int idRequest)
+        {
+            if (idRequest <= 0) return null;
+            try
+            {
+                var request = _context.Requests.FirstOrDefault(x => x.Id.Equals(idRequest));
+                if (request == null) return null;
+
+                //request.Discount = value;
+                //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
+                _context.Database.ExecuteSqlRaw(@"UPDATE requests"
+                                             + " SET tip = 1"
+                                             + " WHERE id = {0}", idRequest);
+                _context.SaveChanges();
+
+                request = _context.Requests
+                    .Include(x => x.Customer)
+                    .Include(x => x.RequestItems)
+                    .FirstOrDefault(x => x.Id.Equals(idRequest));
+
+                return request;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Request CalculateAmount(int idRequest, double amount)
+        {
+            if (idRequest <= 0 || amount < 0) return null;
+            try
+            {
+                var request = _context.Requests.FirstOrDefault(x => x.Id.Equals(idRequest));
+                if (request == null) return null;
+
+                //request.Discount = value;
+                //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
+                _context.Database.ExecuteSqlRaw(@"UPDATE requests"
+                                             + " SET amount = {0}"
+                                             + " WHERE id = {1}", amount, idRequest);
+                _context.SaveChanges();
+
+                request = _context.Requests
+                    .Include(x => x.Customer)
+                    .Include(x => x.RequestItems)
+                    .FirstOrDefault(x => x.Id.Equals(idRequest));
+
+                return request;
+            }
+            catch (Exception) { throw; }
+        }
+
+        public Request UpdateStatus(int idRequest, byte status)
+        {
+            if (idRequest <= 0 || status < 0) return null;
+            try
+            {
+                var request = _context.Requests.FirstOrDefault(x => x.Id.Equals(idRequest));
+                if (request == null) return null;
+
+                //request.Discount = value;
+                //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
+                _context.Database.ExecuteSqlRaw(@"UPDATE requests"
+                                             + " SET status = {0}"
+                                             + " WHERE id = {1}", status, idRequest);
+                _context.SaveChanges();
+
+                request = _context.Requests
+                    .Include(x => x.Customer)
+                    .Include(x => x.RequestItems)
+                    .FirstOrDefault(x => x.Id.Equals(idRequest));
 
                 return request;
             }

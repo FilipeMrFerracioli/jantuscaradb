@@ -64,7 +64,7 @@ namespace Jantuscara.Repository.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     tip = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
                     discount = table.Column<double>(type: "double", nullable: false, defaultValue: 0.0),
-                    amount = table.Column<double>(type: "double", nullable: false, defaultValue: 0.0),
+                    amount = table.Column<double>(type: "double", precision: 17, scale: 2, nullable: false, defaultValue: 0.0),
                     status = table.Column<byte>(type: "tinyint unsigned", nullable: false, defaultValue: (byte)0),
                     id_customer = table.Column<int>(type: "int", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),

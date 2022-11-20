@@ -112,6 +112,7 @@ namespace Jantuscara.Repository.Migrations
 
                     b.Property<double>("Amount")
                         .ValueGeneratedOnAdd()
+                        .HasPrecision(17, 2)
                         .HasColumnType("double")
                         .HasDefaultValue(0.0)
                         .HasColumnName("amount");

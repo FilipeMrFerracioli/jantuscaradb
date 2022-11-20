@@ -6,14 +6,14 @@ namespace Jantuscara.API
     public class RequestService : IRequestService
     {
         private readonly IRequestRepository _repository;
-        private readonly RequestConverter _converer;
+        private readonly RequestConverter _converter;
         private readonly IRequestItemService _requestItemService;
         private readonly IItemRepository _itemRepository;
 
         public RequestService(IRequestRepository repository, IRequestItemService requestItemService, IItemRepository itemRepository)
         {
             _repository = repository;
-            _converer = new RequestConverter();
+            _converter = new RequestConverter();
             _requestItemService = requestItemService;
             _itemRepository = itemRepository;
         }
@@ -26,7 +26,7 @@ namespace Jantuscara.API
                 if (item == null) return null;
             }
 
-            var entity = _converer.Parse(request);
+            var entity = _converter.Parse(request);
             entity = _repository.Create(entity);
             if (entity == null) return null;
 
@@ -35,20 +35,52 @@ namespace Jantuscara.API
                 _requestItemService.Create(entity.Id, ri);
             }
 
-            return _converer.Parse(entity);
+            return _converter.Parse(entity);
         }
 
         public RequestResponseVO FindById(int id)
         {
             var entity = _repository.FindById(id);
-            return _converer.Parse(entity);
+            return _converter.Parse(entity);
         }
 
-        public RequestResponseVO Update(RequestVO request)
+        public RequestResponseVO SetDiscount(int idRequest, int value)
         {
-            var entity = _converer.Parse(request);
-            entity = _repository.Update(entity);
-            return _converer.Parse(entity);
+            var entity = _repository.SetDiscount(idRequest, value);
+
+            return _converter.Parse(entity);
+        }
+
+        public RequestResponseVO PayTip(int idRequest)
+        {
+            var entity = _repository.PayTip(idRequest);
+
+            return _converter.Parse(entity);
+        }
+
+        public RequestResponseVO CalculateAmount(int idRequest)
+        {
+            var entity = _repository.FindById(idRequest);
+
+             double amount = 0;
+
+            foreach(RequestItem ri in entity.RequestItems)
+            {
+                Item item = _itemRepository.FindById(ri.IdItem);
+
+                amount += item.Price;
+            }
+
+            entity = _repository.CalculateAmount(idRequest, entity.CalculateAmount(amount));
+
+            return _converter.Parse(entity);
+        }
+
+        public RequestResponseVO UpdateStatus(int idRequest, OrderStatus status)
+        {
+            var entity = _repository.UpdateStatus(idRequest, (byte)status);
+
+            return _converter.Parse(entity);
         }
     }
 }

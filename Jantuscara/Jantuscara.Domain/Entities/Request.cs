@@ -10,7 +10,7 @@
         public virtual Customer Customer { get; set; }
         public virtual List<RequestItem> RequestItems { get; set; }
 
-        public void CalculateAmount(double valueItems)
+        public double CalculateAmount(double valueItems)
         {
             valueItems -= valueItems * (Discount / 100);
 
@@ -19,7 +19,7 @@
                 valueItems += valueItems * (10 / 100);
             }
 
-            Amount = valueItems;
+            return valueItems;
         }
     }
 }

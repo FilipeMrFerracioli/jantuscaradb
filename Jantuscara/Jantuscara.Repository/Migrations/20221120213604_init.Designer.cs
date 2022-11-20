@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jantuscara.Repository.Migrations
 {
     [DbContext(typeof(MySqlDbContext))]
-    [Migration("20221119003756_init")]
+    [Migration("20221120213604_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,6 +114,7 @@ namespace Jantuscara.Repository.Migrations
 
                     b.Property<double>("Amount")
                         .ValueGeneratedOnAdd()
+                        .HasPrecision(17, 2)
                         .HasColumnType("double")
                         .HasDefaultValue(0.0)
                         .HasColumnName("amount");

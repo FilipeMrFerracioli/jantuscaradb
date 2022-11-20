@@ -27,6 +27,7 @@ namespace Jantuscara.Repository
             builder.Property(x => x.Amount)
                 .HasColumnName("amount")
                 .HasDefaultValue(0)
+                .HasPrecision(17, 2)
                 .IsRequired();
 
             builder.Property(x => x.Status)
