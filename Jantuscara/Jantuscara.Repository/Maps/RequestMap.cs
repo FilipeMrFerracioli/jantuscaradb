@@ -16,18 +16,22 @@ namespace Jantuscara.Repository
 
             builder.Property(x => x.Tip)
                 .HasColumnName("tip")
+                .HasDefaultValue(false)
                 .IsRequired();
 
             builder.Property(x => x.Discount)
                 .HasColumnName("discount")
+                .HasDefaultValue(0)
                 .IsRequired();
 
             builder.Property(x => x.Amount)
                 .HasColumnName("amount")
+                .HasDefaultValue(0)
                 .IsRequired();
 
             builder.Property(x => x.Status)
                 .HasColumnName("status")
+                .HasDefaultValue(OrderStatus.Preparing)
                 .IsRequired();
 
             /* Relationship mapping between X and Y */

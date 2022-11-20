@@ -20,12 +20,5 @@ namespace Jantuscara.API
             entity = _repository.Create(entity);
             return _converter.Parse(entity);
         }
-
-        public CustomerResponseVO Update(CustomerVO customer)
-        {
-            var entity = _converter.Parse(customer);
-            entity = _repository.Update(entity);
-            return _converter.Parse(entity);
-        }
     }
 }

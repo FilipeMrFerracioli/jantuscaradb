@@ -26,10 +26,12 @@ namespace Jantuscara.Repository
             builder.Property(x => x.Description)
                 .HasColumnName("description")
                 .HasMaxLength(500)
+                .HasDefaultValue("")
                 .IsRequired(false);
 
             builder.Property(x => x.ImgURL)
                 .HasColumnName("img_url")
+                .HasDefaultValue("")
                 .IsRequired(false);
         }
     }

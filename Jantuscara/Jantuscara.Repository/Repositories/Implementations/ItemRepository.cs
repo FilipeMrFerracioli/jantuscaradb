@@ -1,4 +1,5 @@
 ﻿using Jantuscara.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jantuscara.Repository
 {
@@ -15,7 +16,8 @@ namespace Jantuscara.Repository
         {
             try
             {
-                var result = _context.Items.ToList();
+                //var result = _context.Items.ToList(); com LINQ
+                var result = _context.Items.FromSqlRaw("SELECT * FROM items").ToList();
 
                 if (result == null) return null;
 
@@ -29,7 +31,8 @@ namespace Jantuscara.Repository
             if (id <= 0) return null;
             try
             {
-                var result = _context.Items.SingleOrDefault(x => x.Id.Equals(id));
+                //var result = _context.Items.SingleOrDefault(x => x.Id.Equals(id)); com LINQ
+                var result = _context.Items.FromSqlRaw($"SELECT * FROM items WHERE id = {id}").FirstOrDefault();
 
                 if (result == null) return null;
 
@@ -43,7 +46,10 @@ namespace Jantuscara.Repository
             if (item == null) return null;
             try
             {
-                _context.Items.Add(item);
+                //_context.Items.Add(item); com LINQ
+                _context.Database.ExecuteSqlRaw(@"INSERT INTO items (name, price, description, img_url)"
+                                                + " VALUES ({0}, {1}, {2}, {3})",
+                                                item.Name, item.Price, item.Description, item.ImgURL);
                 _context.SaveChanges();
 
                 return item;

@@ -12,7 +12,7 @@
 
         public void CalculateAmount(double valueItems)
         {
-            valueItems += valueItems * (Discount / 100);
+            valueItems -= valueItems * (Discount / 100);
 
             if (Tip)
             {
@@ -20,7 +20,6 @@
             }
 
             Amount = valueItems;
-            //return valueItems;
         }
     }
 }

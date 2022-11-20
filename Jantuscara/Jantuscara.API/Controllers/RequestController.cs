@@ -14,13 +14,6 @@ namespace Jantuscara.API.Controllers
             _request = request;
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<RequestResponseVO>))]
-        //public IActionResult FindAll()
-        //{
-        //    return Ok(_request.FindAll());
-        //}
-
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RequestResponseVO))]
@@ -37,24 +30,5 @@ namespace Jantuscara.API.Controllers
 
             return Ok(res);
         }
-
-        //[HttpPut]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ItemResponseVO))]
-        //public IActionResult Update([FromBody] AddressUpdateVO address)
-        //{
-        //    var res = _address.Update(address);
-
-        //    return Ok(res);
-        //}
-
-        //[HttpPut]
-        //[Route("{id}")]
-        //[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AddressResponseVO))]
-        //public IActionResult EnableOrUpdate(int id)
-        //{
-        //    var res = _address.EnableOrDisable(id);
-
-        //    return Ok(res);
-        //}
     }
 }

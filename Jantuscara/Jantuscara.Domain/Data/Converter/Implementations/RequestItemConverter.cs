@@ -18,7 +18,6 @@
             return new RequestItem
             {
                 Note = origin.Note,
-                //IdRequest = origin.IdRequest,
                 IdItem = origin.IdItem
             };
         }
@@ -37,8 +36,6 @@
             {
                 Id = origin.Id,
                 Note = origin.Note,
-                //IdRequest = origin.IdRequest,
-                //Request = origin.Request,
                 IdItem = origin.IdItem,
                 Item = _itemConverter.Parse(_itemConverter.Parse(origin.Item)),
                 CreatedAt = origin.CreatedAt,

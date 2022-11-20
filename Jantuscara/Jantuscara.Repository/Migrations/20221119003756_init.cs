@@ -43,9 +43,9 @@ namespace Jantuscara.Repository.Migrations
                     name = table.Column<string>(type: "varchar(60)", maxLength: 60, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     price = table.Column<double>(type: "double", nullable: false),
-                    description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
+                    description = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true, defaultValue: "")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    img_url = table.Column<string>(type: "longtext", nullable: true)
+                    img_url = table.Column<string>(type: "longtext", nullable: true, defaultValue: "")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
@@ -62,10 +62,10 @@ namespace Jantuscara.Repository.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    tip = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    discount = table.Column<double>(type: "double", nullable: false),
-                    amount = table.Column<double>(type: "double", nullable: false),
-                    status = table.Column<byte>(type: "tinyint unsigned", nullable: false),
+                    tip = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false),
+                    discount = table.Column<double>(type: "double", nullable: false, defaultValue: 0.0),
+                    amount = table.Column<double>(type: "double", nullable: false, defaultValue: 0.0),
+                    status = table.Column<byte>(type: "tinyint unsigned", nullable: false, defaultValue: (byte)0),
                     id_customer = table.Column<int>(type: "int", nullable: false),
                     created_at = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     updated_at = table.Column<DateTime>(type: "datetime(6)", nullable: false)
@@ -88,7 +88,7 @@ namespace Jantuscara.Repository.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    note = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
+                    note = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true, defaultValue: "")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     id_request = table.Column<int>(type: "int", nullable: false),
                     id_item = table.Column<int>(type: "int", nullable: false),
@@ -112,6 +112,12 @@ namespace Jantuscara.Repository.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_document",
+                table: "Customers",
+                column: "document",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RequestItems_id_item",

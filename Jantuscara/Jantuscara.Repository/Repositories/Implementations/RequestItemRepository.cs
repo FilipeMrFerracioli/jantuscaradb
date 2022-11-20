@@ -1,4 +1,5 @@
 ﻿using Jantuscara.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jantuscara.Repository
 {
@@ -16,7 +17,8 @@ namespace Jantuscara.Repository
             if (id <= 0) return null;
             try
             {
-                var result = _context.RequestItems.SingleOrDefault(x => x.Id.Equals(id));
+                //var result = _context.RequestItems.FirstOrDefault(x => x.Id.Equals(id)); com LINQ
+                var result = _context.RequestItems.FromSqlRaw(@"SELECT * FROM requestitems WHERE = {0}", id).FirstOrDefault();
 
                 if (result == null) return null;
 
@@ -30,7 +32,8 @@ namespace Jantuscara.Repository
             if (requestItem == null) return null;
             try
             {
-                var item = _context.Items.SingleOrDefault(x => x.Id.Equals(requestItem.IdItem));
+                //var item = _context.Items.SingleOrDefault(x => x.Id.Equals(requestItem.IdItem)); com LINQ
+                var item = _context.Items.FromSqlRaw($"SELECT * FROM items WHERE id = {requestItem.IdItem}").FirstOrDefault();
                 if (item == null) return null;
 
                 _context.RequestItems.Add(requestItem);
@@ -40,23 +43,5 @@ namespace Jantuscara.Repository
             }
             catch (Exception) { throw; }
         }
-
-        //public Request Update(Request request)
-        //{
-        //    if (request == null) return null;
-        //    try
-        //    {
-        //        var result = _context.Requests.SingleOrDefault(x => x.Id.Equals(request.Id));
-
-        //        if (result == null) return null;
-
-        //        request.Id = result.Id;
-        //        _context.Entry(result).CurrentValues.SetValues(request);
-        //        _context.SaveChanges();
-
-        //        return request;
-        //    }
-        //    catch (Exception) { throw; }
-        //}
     }
 }

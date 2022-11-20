@@ -32,7 +32,7 @@ namespace Jantuscara.API
 
             foreach (RequestItemVO ri in request.RequestItems)
             {
-                var requestItem = _requestItemService.Create(entity.Id, ri);
+                _requestItemService.Create(entity.Id, ri);
             }
 
             return _converer.Parse(entity);

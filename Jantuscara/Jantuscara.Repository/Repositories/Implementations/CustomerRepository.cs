@@ -1,4 +1,5 @@
 ﻿using Jantuscara.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jantuscara.Repository
 {
@@ -16,33 +17,17 @@ namespace Jantuscara.Repository
             if (customer == null) return null;
             try
             {
-                var result = _context.Customers.SingleOrDefault(x => x.Document.Equals(customer.Document));
+                //var result = _context.Customers.SingleOrDefault(x => x.Document.Equals(customer.Document)); com LINQ
+                var result = _context.Customers.FromSqlRaw($"SELECT * FROM customers WHERE document = {customer.Document}").FirstOrDefault();
 
                 if (result != null) return result;
 
-                _context.Customers.Add(customer);
+                //_context.Customers.Add(customer); com LINQ
+                _context.Database.ExecuteSqlRaw(@"INSERT INTO customers (first_name, last_name, document)"
+                                                + " VALUES ({0}, {1}, {2})", customer.FirstName, customer.LastName, customer.Document);
                 _context.SaveChanges();
 
                 return customer;
-            }
-            catch (Exception) { throw; }
-        }
-
-        public Customer Update(Customer customer)
-        {
-            if (customer == null) return null;
-            try
-            {
-                var result = _context.Customers.SingleOrDefault(x => x.Document.Equals(customer.Document));
-
-                if (result == null) return null;
-
-                customer.Id = result.Id;
-                customer.Document = result.Document; // verificar se precisa
-                _context.Entry(result).CurrentValues.SetValues(customer);
-                _context.SaveChanges();
-
-                return result;
             }
             catch (Exception) { throw; }
         }

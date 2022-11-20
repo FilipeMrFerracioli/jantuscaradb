@@ -4,8 +4,6 @@
     {
         public int Id { get; set; }
         public string Note { get; set; }
-        //public int IdRequest { get; set; }
-        //public RequestVO Request { get; set; }
         public int IdItem { get; set; }
         public ItemVO Item { get; set; }
         public DateTime CreatedAt { get; set; }

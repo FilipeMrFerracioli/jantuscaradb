@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Rewrite;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = "Server=localhost;Database=jantuscaradb;Uid=root;Pwd=root;";
-//var connectionString = "Server=empeldb.mysql.database.azure.com;Database=empeldb;Uid=empel;Pwd=eml@1234;";
 
 // Add services to the container.
 

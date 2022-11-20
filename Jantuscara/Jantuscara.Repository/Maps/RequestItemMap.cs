@@ -17,6 +17,7 @@ namespace Jantuscara.Repository
             builder.Property(x => x.Note)
                 .HasColumnName("note")
                 .HasMaxLength(500)
+                .HasDefaultValue("")
                 .IsRequired(false);
 
             /* Relationship mapping between X and Y */

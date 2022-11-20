@@ -19,8 +19,19 @@ namespace Jantuscara.Repository
             {
                 var result = _context.Requests
                     .Include(x => x.Customer)
-                    .Include(x => x.RequestItems) // verificar
+                    .Include(x => x.RequestItems)
                     .SingleOrDefault(x => x.Id.Equals(id));
+                /*
+                 SELECT * FROM requests
+                    INNER JOIN customers
+                    ON id_customer = customers.id
+                    INNER JOIN requestitems
+                    ON id_request = requestitems.id
+                 WHERE requests.id = <id>;
+                 ----------------------------------
+                 O EF não aceita query bruta com relações (junções).
+                 Exemplo acima de como seria uma query SQL!
+                 */
 
                 if (result == null) return null;
 
@@ -34,7 +45,8 @@ namespace Jantuscara.Repository
             if (request == null) return null;
             try
             {
-                var customer = _context.Customers.FirstOrDefault(x => x.Id.Equals(request.IdCustomer));
+                //var customer = _context.Customers.FirstOrDefault(x => x.Id.Equals(request.IdCustomer)); com LINQ
+                var customer = _context.Customers.FromSqlRaw($"SELECT * FROM customers WHERE id = {request.IdCustomer}").SingleOrDefault();
                 if (customer == null) return null;
 
                 _context.Requests.Add(request);

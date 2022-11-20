@@ -11,9 +11,6 @@ namespace Jantuscara.API
 
         private static void RepositoryDependence(IServiceCollection serviceProvider)
         {
-            /* From generic repository */
-
-
             /* From own repository */
             serviceProvider.AddScoped(typeof(IItemService), typeof(ItemService));
             serviceProvider.AddScoped(typeof(IItemRepository), typeof(ItemRepository));
@@ -26,9 +23,6 @@ namespace Jantuscara.API
 
             serviceProvider.AddScoped(typeof(IRequestItemService), typeof(RequestItemService));
             serviceProvider.AddScoped(typeof(IRequestItemRepository), typeof(RequestItemRepository));
-
-            /* Generic repository */
-            //serviceProvider.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
     }
 }

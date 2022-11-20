@@ -6,6 +6,5 @@ namespace Jantuscara.Repository
     {
         public RequestItem FindById(int id);
         public RequestItem Create(RequestItem requestItem);
-        //public Request Update(Request request);
     }
 }

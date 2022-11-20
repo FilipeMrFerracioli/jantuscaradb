@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jantuscara.Repository.Migrations
 {
     [DbContext(typeof(MySqlDbContext))]
-    [Migration("20221117034816_init")]
+    [Migration("20221119003756_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,9 @@ namespace Jantuscara.Repository.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Document")
+                        .IsUnique();
+
                     b.ToTable("Customers", (string)null);
                 });
 
@@ -71,12 +74,16 @@ namespace Jantuscara.Repository.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)")
+                        .HasDefaultValue("")
                         .HasColumnName("description");
 
                     b.Property<string>("ImgURL")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("longtext")
+                        .HasDefaultValue("")
                         .HasColumnName("img_url");
 
                     b.Property<string>("Name")
@@ -106,7 +113,9 @@ namespace Jantuscara.Repository.Migrations
                         .HasColumnName("id");
 
                     b.Property<double>("Amount")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("double")
+                        .HasDefaultValue(0.0)
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("CreatedAt")
@@ -114,7 +123,9 @@ namespace Jantuscara.Repository.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<double>("Discount")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("double")
+                        .HasDefaultValue(0.0)
                         .HasColumnName("discount");
 
                     b.Property<int>("IdCustomer")
@@ -122,11 +133,15 @@ namespace Jantuscara.Repository.Migrations
                         .HasColumnName("id_customer");
 
                     b.Property<byte>("Status")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint unsigned")
+                        .HasDefaultValue((byte)0)
                         .HasColumnName("status");
 
                     b.Property<bool>("Tip")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false)
                         .HasColumnName("tip");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -160,8 +175,10 @@ namespace Jantuscara.Repository.Migrations
                         .HasColumnName("id_request");
 
                     b.Property<string>("Note")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)")
+                        .HasDefaultValue("")
                         .HasColumnName("note");
 
                     b.Property<DateTime>("UpdatedAt")

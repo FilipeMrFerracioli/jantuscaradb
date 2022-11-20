@@ -14,6 +14,9 @@ namespace Jantuscara.Repository
         {
             base.Configure(builder);
 
+            builder.HasIndex(x => x.Document)
+                .IsUnique();
+
             builder.Property(x => x.FirstName)
                 .HasColumnName("first_name")
                 .HasMaxLength(15)
