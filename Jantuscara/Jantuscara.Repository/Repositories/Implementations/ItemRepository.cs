@@ -47,9 +47,12 @@ namespace Jantuscara.Repository
             try
             {
                 //_context.Items.Add(item); com LINQ
-                _context.Database.ExecuteSqlRaw(@"INSERT INTO items (name, price, description, img_url)"
-                                                + " VALUES ({0}, {1}, {2}, {3})",
-                                                item.Name, item.Price, item.Description, item.ImgURL);
+                DateTime dt = DateTime.UtcNow;
+                item.CreatedAt = dt;
+                item.UpdatedAt = dt;
+                _context.Database.ExecuteSqlRaw(@"INSERT INTO items (name, price, description, img_url, created_at, updated_at)"
+                                                + " VALUES ({0}, {1}, {2}, {3}, {4}, {5})",
+                                                item.Name, item.Price, item.Description, item.ImgURL, dt, dt);
                 _context.SaveChanges();
 
                 return item;

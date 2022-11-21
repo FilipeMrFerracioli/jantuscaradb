@@ -61,6 +61,7 @@ namespace Jantuscara.API
         public RequestResponseVO CalculateAmount(int idRequest)
         {
             var entity = _repository.FindById(idRequest);
+            if (entity == null) return null;
 
              double amount = 0;
 

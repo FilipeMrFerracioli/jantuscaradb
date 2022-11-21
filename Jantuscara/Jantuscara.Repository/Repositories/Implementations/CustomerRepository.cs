@@ -23,8 +23,11 @@ namespace Jantuscara.Repository
                 if (result != null) return result;
 
                 //_context.Customers.Add(customer); com LINQ
-                _context.Database.ExecuteSqlRaw(@"INSERT INTO customers (first_name, last_name, document)"
-                                                + " VALUES ({0}, {1}, {2})", customer.FirstName, customer.LastName, customer.Document);
+                DateTime dt = DateTime.UtcNow;
+                customer.CreatedAt = dt;
+                customer.UpdatedAt = dt;
+                _context.Database.ExecuteSqlRaw(@"INSERT INTO customers (first_name, last_name, document, created_at, updated_at)"
+                                                + " VALUES ({0}, {1}, {2}, {3}, {4})", customer.FirstName, customer.LastName, customer.Document, dt, dt);
                 _context.SaveChanges();
 
                 return customer;

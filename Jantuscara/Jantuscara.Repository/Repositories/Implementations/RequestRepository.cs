@@ -20,7 +20,7 @@ namespace Jantuscara.Repository
                 var result = _context.Requests
                     .Include(x => x.Customer)
                     .Include(x => x.RequestItems)
-                    .SingleOrDefault(x => x.Id.Equals(id));
+                    .FirstOrDefault(x => x.Id.Equals(id));
                 /*
                  SELECT * FROM requests
                     INNER JOIN customers
@@ -68,8 +68,9 @@ namespace Jantuscara.Repository
                 //request.Discount = value;
                 //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
                 _context.Database.ExecuteSqlRaw(@"UPDATE requests"
-                                             + " SET discount = {0}"
-                                             + " WHERE id = {1}", value, idRequest);
+                                             + " SET discount = {0},"
+                                             + " updated_at = {2}"
+                                             + " WHERE id = {1}", value, idRequest, DateTime.UtcNow);
                 _context.SaveChanges();
 
                 request = _context.Requests
@@ -93,8 +94,9 @@ namespace Jantuscara.Repository
                 //request.Discount = value;
                 //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
                 _context.Database.ExecuteSqlRaw(@"UPDATE requests"
-                                             + " SET tip = 1"
-                                             + " WHERE id = {0}", idRequest);
+                                             + " SET tip = 1,"
+                                             + " updated_at = {1}"
+                                             + " WHERE id = {0}", idRequest, DateTime.UtcNow);
                 _context.SaveChanges();
 
                 request = _context.Requests
@@ -118,8 +120,9 @@ namespace Jantuscara.Repository
                 //request.Discount = value;
                 //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
                 _context.Database.ExecuteSqlRaw(@"UPDATE requests"
-                                             + " SET amount = {0}"
-                                             + " WHERE id = {1}", amount, idRequest);
+                                             + " SET amount = {0},"
+                                             + " updated_at = {2}"
+                                             + " WHERE id = {1}", amount, idRequest, DateTime.UtcNow);
                 _context.SaveChanges();
 
                 request = _context.Requests
@@ -143,8 +146,9 @@ namespace Jantuscara.Repository
                 //request.Discount = value;
                 //_context.Entry(request).CurrentValues.SetValues(request); com LINQ
                 _context.Database.ExecuteSqlRaw(@"UPDATE requests"
-                                             + " SET status = {0}"
-                                             + " WHERE id = {1}", status, idRequest);
+                                             + " SET status = {0},"
+                                             + " updated_at = {2}"
+                                             + " WHERE id = {1}", status, idRequest, DateTime.UtcNow);
                 _context.SaveChanges();
 
                 request = _context.Requests

@@ -15,33 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Filipe\",\r\n    \"lastName\": \"MrF\",\r\n    \"document\": \"123\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/customer",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"customer"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Filipe\",\r\n    \"lastName\": \"MrF\",\r\n    \"document\": \"123\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"teste2\",\r\n    \"lastName\": \"MrF\",\r\n    \"document\": \"56\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -107,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mistura bolo\",\r\n    \"price\": 7.29,\r\n    \"description\": \"\",\r\n    \"imgURL\": \"\"\r\n}",
+							"raw": "{\r\n    \"name\": \"sabao\",\r\n    \"price\": 5,\r\n    \"description\": \"\",\r\n    \"imgURL\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,13 +111,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/request/32",
+							"raw": "{{base_url}}/request/12",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"request",
-								"32"
+								"12"
 							]
 						}
 					},
@@ -156,7 +130,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idCustomer\": 2,\r\n    \"requestItems\": [\r\n        {\r\n            \"note\": \"string\",\r\n            \"idItem\": 3\r\n        },\r\n        {\r\n            \"note\": \"\",\r\n            \"idItem\": 1\r\n        },\r\n        {\r\n            \"note\": \"51\",\r\n            \"idItem\": 2\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"idCustomer\": 1,\r\n    \"requestItems\": [\r\n        {\r\n            \"note\": \"string\",\r\n            \"idItem\": 1\r\n        },\r\n        {\r\n            \"note\": \"\",\r\n            \"idItem\": 1\r\n        },\r\n        {\r\n            \"note\": \"51\",\r\n            \"idItem\": 2\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -170,6 +144,100 @@
 							],
 							"path": [
 								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SetDiscount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "12",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/request/set-discount/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"request",
+								"set-discount",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PayTip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/request/pay-tip/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"request",
+								"pay-tip",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CalculateAmount",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/request/calculate-amount/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"request",
+								"calculate-amount",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateStatus",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "3",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/request/update-status/12",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"request",
+								"update-status",
+								"12"
 							]
 						}
 					},
